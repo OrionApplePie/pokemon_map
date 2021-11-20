@@ -4,12 +4,15 @@ from django.db.models.base import Model  # noqa F401
 class Pokemon(models.Model):
     """Модель покемона."""
 
-    title = models.CharField(max_length=200)
+    title_ru = models.CharField(max_length=200)
+    title_en = models.CharField(max_length=200)
+    title_jp = models.CharField(max_length=200)
+
     description = models.TextField(null=True, blank=True)
     picture = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.title_ru
 
 
 class PokemonEntity(models.Model):
