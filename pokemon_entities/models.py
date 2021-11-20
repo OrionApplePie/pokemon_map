@@ -8,8 +8,14 @@ class Pokemon(models.Model):
     title_en = models.CharField(verbose_name='Имя (англ.)', max_length=200)
     title_jp = models.CharField(verbose_name='Имя (яп.)', max_length=200)
 
-    description = models.TextField(verbose_name='Описание', null=True, blank=True)
-    image = models.ImageField(verbose_name='Изображение', null=True, blank=True)
+    description = models.TextField(
+        verbose_name='Описание',
+        null=True, blank=True
+    )
+    image = models.ImageField(
+        verbose_name='Изображение',
+        null=True, blank=True
+    )
 
     previous_evolution = models.ForeignKey(
         'self',
