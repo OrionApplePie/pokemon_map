@@ -67,6 +67,9 @@ def show_pokemon(request, pokemon_id):
         requested_pokemon.image.url
     )
 
+    previous_evolution = None
+    next_evolution = None
+
     if requested_pokemon.previous_evolution is not None:
         previous_evolution_pokemon_image_url = request.build_absolute_uri(
             requested_pokemon.previous_evolution.image.url
@@ -76,8 +79,18 @@ def show_pokemon(request, pokemon_id):
             'pokemon_id': requested_pokemon.previous_evolution.id,
             'img_url': previous_evolution_pokemon_image_url,
         }
-    else:
-        previous_evolution = None
+
+    next_evolutions = requested_pokemon.next_evolutions.all()
+
+    if next_evolutions.exists():
+        next_evolution_pokemon_image_url = request.build_absolute_uri(
+            next_evolutions[0].image.url
+        )
+        next_evolution = {
+            'title_ru': next_evolutions[0].title_ru,
+            'pokemon_id': next_evolutions[0].id,
+            'img_url': next_evolution_pokemon_image_url,
+        }
 
     pokemon = {
         'title_ru': requested_pokemon.title_ru,
@@ -85,7 +98,9 @@ def show_pokemon(request, pokemon_id):
         'title_jp': requested_pokemon.title_jp,
         'description': requested_pokemon.description,
         'img_url': pokemon_image_url,
+
         'previous_evolution': previous_evolution,
+        'next_evolution': next_evolution,
     }
 
     pokemon_entities = PokemonEntity.objects.filter(
