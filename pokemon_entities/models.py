@@ -9,7 +9,7 @@ class Pokemon(models.Model):
     title_jp = models.CharField(max_length=200)
 
     description = models.TextField(null=True, blank=True)
-    picture = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.title_ru
