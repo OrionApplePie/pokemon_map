@@ -1,3 +1,6 @@
-from django.db import models  # noqa F401
+from django.db import models
+from django.db.models.base import Model  # noqa F401
 
-# your models here
+class Pokemon(models.Model):
+    """Модель покемона."""
+    title = models.CharField(blank=False, max_length=200)
