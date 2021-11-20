@@ -22,5 +22,11 @@ class PokemonEntity(models.Model):
     appeared_at = models.DateTimeField()
     disappeared_at = models.DateTimeField()
 
+    level = models.IntegerField()
+    health = models.IntegerField()
+    strength = models.IntegerField()
+    defence = models.IntegerField()
+    stamina = models.IntegerField()
+
     def __str__(self):
-        return f'{self.pokemon} on lat: {self.lat}, lon: {self.lon}'
+        return f'{self.pokemon} {self.level} ур.'
