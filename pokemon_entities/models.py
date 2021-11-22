@@ -30,7 +30,7 @@ class Pokemon(models.Model):
         null=True, blank=True,
         verbose_name='Из кого эволюционировал',
         related_name='next_evolutions',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):
