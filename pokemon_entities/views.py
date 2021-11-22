@@ -1,5 +1,4 @@
 import folium
-import json
 
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
@@ -41,10 +40,9 @@ def show_all_pokemons(request):
             ),
         )
 
-    pokemons = Pokemon.objects.all()
-
     pokemons_on_page = []
-    for pokemon in pokemons:
+
+    for pokemon in Pokemon.objects.all():
         pokemons_on_page.append({
             'pokemon_id': pokemon.id,
             'img_url': request.build_absolute_uri(pokemon.image.url),
@@ -103,13 +101,9 @@ def show_pokemon(request, pokemon_id):
         'next_evolution': next_evolution,
     }
 
-    pokemon_entities = PokemonEntity.objects.filter(
-        pokemon__id=pokemon_id
-    )
-
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
 
-    for pokemon_entity in pokemon_entities:
+    for pokemon_entity in requested_pokemon.entities.all():
         add_pokemon(
             folium_map,
             pokemon_entity.lat,
